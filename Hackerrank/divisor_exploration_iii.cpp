@@ -69,7 +69,12 @@ LL solve(LL m, LL a, LL d)
         if (d == 1)
             ans = (ans * powmod(p, e)) % MOD;
         else if (d == 2)
-            ans = (ans * ((powmod(p, e + 1) - 1) * modinv(p - 1, MOD)) % MOD) % MOD;
+        {
+            LL t1 = powmod(p, e + 1) - 1;
+            LL t2 = (t1 * modinv(p - 1, MOD)) % MOD;
+
+            ans = (ans * t2) % MOD;
+        }
         else
         {
             LL curr_p = powmod(p, e + 1);
