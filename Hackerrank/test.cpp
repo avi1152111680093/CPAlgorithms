@@ -59,37 +59,68 @@ void initialize()
     }
 }
 
+LL moduloMultiplication(LL a, LL b,
+                        LL mod)
+{
+    LL res = 0; // Initialize result
+
+    // Update a if it is more than
+    // or equal to mod
+    a %= mod;
+
+    while (b)
+    {
+        // If b is odd, add a with result
+        if (b & 1)
+            res = (res + a) % mod;
+
+        // Here we assume that doing 2*a
+        // doesn't cause overflow
+        a = (2 * a) % mod;
+
+        b >>= 1; // b = b / 2
+    }
+
+    return res;
+}
+
 vector<LL> primes;
 bool isprime[1299710];
 
 int main()
 {
-    memset(isprime, true, 1299710);
+    // memset(isprime, true, 1299710);
 
-    for (int i = 2; i < 1299710; i++)
-    {
-        if (isprime[i] == false)
-            continue;
-        for (int j = 2; j <= 1299710 / i; j++)
-            isprime[i * j] = false;
-        if (isprime[i] == true)
-            primes.push_back(i);
-    }
+    // for (int i = 2; i < 1299710; i++)
+    // {
+    //     if (isprime[i] == false)
+    //         continue;
+    //     for (int j = 2; j <= 1299710 / i; j++)
+    //         isprime[i * j] = false;
+    //     if (isprime[i] == true)
+    //         primes.push_back(i);
+    // }
 
-    // for (LL prime : primes)
-    // {
-    //     if (modinv(prime - 1, MOD) * (prime - 1) % MOD != 1)
-    //         cout << prime << endl;
-    //     // cout << modinv(prime - 1, MOD) << endl;
-    // }
-    // for (int i = 1; i < 2002; i++)
-    // {
-    //     if (modinv(i, MOD) * i % MOD != 1)
-    //         cout << i << endl;
-    //     // cout << modinv(i, MOD) << endl;
-    // }
-    cout << (binpow(23, 100) * modinv(23, MOD)) % MOD << endl;
-    cout << binpow(23, 99) << endl;
+    // // for (LL prime : primes)
+    // // {
+    // //     if (modinv(prime - 1, MOD) * (prime - 1) % MOD != 1)
+    // //         cout << prime << endl;
+    // //     // cout << modinv(prime - 1, MOD) << endl;
+    // // }
+    // // for (int i = 1; i < 2002; i++)
+    // // {
+    // //     if (modinv(i, MOD) * i % MOD != 1)
+    // //         cout << i << endl;
+    // //     // cout << modinv(i, MOD) << endl;
+    // // }
+    // cout << (binpow(23, 100) * modinv(23, MOD)) % MOD << endl;
+    // cout << binpow(23, 99) << endl;
+
+    LL a = 1000000000000000;
+    LL b = 1000000000000000;
+    LL m = 91323;
+
+    cout << moduloMultiplication(a, b, m) << endl;
 
     return 0;
 }
